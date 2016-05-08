@@ -44,12 +44,12 @@
     <Compile Include="Config\FriendlyLoggerSection.cs" />
     <Compile Include="Config\LoggerElement.cs" />
     <Compile Include="Config\LoggerElementCollection.cs" />
+    <Compile Include="Core\ILog.cs" />
+    <Compile Include="Logger\ConsoleLogger.cs" />
+    <Compile Include="Logger\FileLogger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\" />
-    <Folder Include="Logger\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
