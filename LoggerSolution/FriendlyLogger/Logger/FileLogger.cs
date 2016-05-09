@@ -30,7 +30,7 @@ namespace FriendlyLogger.Logger
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
 
-            using (StreamWriter writer = new StreamWriter(path, true))
+            using (StreamWriter writer = new StreamWriter(path + "log.txt", true))
             {
                 writer.WriteLine(message);
             }
