@@ -33,9 +33,17 @@ namespace FriendlyLogger.Core
             var allLevels = Util.GetLevelByType(Parameters.LevelName.ALL);
 
             if (Levels.Contains(allLevels))
+            {
                 return true;
+            }
             else
+            {
+                // Enables DEBUG log by default
+                if (!Levels.Any() && level.Name.Equals(Parameters.LevelName.DEBUG))
+                    return true;
+
                 return Levels.Contains(level);
+            }
         }
     }
 }

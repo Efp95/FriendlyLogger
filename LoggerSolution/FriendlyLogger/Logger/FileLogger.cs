@@ -14,7 +14,7 @@ namespace FriendlyLogger.Logger
 
         public override void Log(Type declaringType, Level level, object message, Exception exception)
         {
-            throw new NotImplementedException();
+            //
         }
     }
 }

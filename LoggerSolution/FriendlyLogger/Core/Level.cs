@@ -1,4 +1,6 @@
 ﻿using FriendlyLogger.Common;
+using FriendlyLogger.Config;
+using System.Collections.Generic;
 
 namespace FriendlyLogger.Core
 {
@@ -42,12 +44,31 @@ namespace FriendlyLogger.Core
 
 
         public readonly static Level[] Levels = {
-            //new Level(6000, Parameters.LevelName.ALL),
+            new Level(6000, Parameters.LevelName.ALL),
             new Level(5000, Parameters.LevelName.FATAL),
             new Level(4000, Parameters.LevelName.ERROR),
             new Level(3000, Parameters.LevelName.WARN),
             new Level(2000, Parameters.LevelName.INFO),
             new Level(1000, Parameters.LevelName.DEBUG) 
         };
+    }
+
+    class LevelMapping
+    {
+        public static IEnumerable<Level> Run(LevelElementCollection levelElementCollection)
+        {
+            List<Level> level = new List<Level>();
+
+            if (levelElementCollection == null)
+                level.Add(Util.GetLevelByType(Parameters.LevelName.DEBUG));
+            {
+                foreach (LevelElement levelElement in levelElementCollection)
+                {
+                    level.Add(Util.GetLevelByType(levelElement.Value));
+                }
+            }
+
+            return level;
+        }
     }
 }

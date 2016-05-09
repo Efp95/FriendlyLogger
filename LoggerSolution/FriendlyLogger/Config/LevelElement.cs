@@ -6,7 +6,7 @@ namespace FriendlyLogger.Config
     {
         private const string ValueAttribute = "value";
 
-        [ConfigurationProperty(ValueAttribute)]
+        [ConfigurationProperty(ValueAttribute, IsRequired = true)]
         public string Value
         {
             get { return (string)this[ValueAttribute]; }

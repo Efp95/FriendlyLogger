@@ -35,8 +35,8 @@ namespace FriendlyLogger
                 if (!typeof(ILogger).IsAssignableFrom(loggerType))
                     throw new InvalidConfigurationElementException(MustInheritFromLoggerImpl);
 
-                var levelCollection = logger.LevelCollection as IEnumerable<Level>;
-                var loggerInstance = (ILogger)Activator.CreateInstance(loggerType, levelCollection);
+                var levelCollection = LevelMapping.Run(logger.LevelCollection);
+                var loggerInstance = (ILogger)Activator.CreateInstance(loggerType, logger.Name, levelCollection);
 
                 configLoggers.Add(loggerInstance);
             }

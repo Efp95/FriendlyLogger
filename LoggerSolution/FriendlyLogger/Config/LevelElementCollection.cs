@@ -46,12 +46,12 @@ namespace FriendlyLogger.Config
 
         protected override ConfigurationElement CreateNewElement()
         {
-            throw new NotImplementedException();
+            return new LevelElement();
         }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
-            throw new NotImplementedException();
+            return ((LevelElement)element).Value;
         }
     }
 }
