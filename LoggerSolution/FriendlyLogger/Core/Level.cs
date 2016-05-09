@@ -1,9 +1,4 @@
 ﻿using FriendlyLogger.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FriendlyLogger.Core
 {
@@ -40,15 +35,19 @@ namespace FriendlyLogger.Core
             _displayName = displayName;
         }
 
-        public Level(int level, string levelName) : this(level, levelName, levelName)
+        public Level(int level, string levelName)
+            : this(level, levelName, levelName)
         {
         }
 
 
-        public readonly static Level Fatal = new Level(50000, Parameters.LevelName.FATAL);
-        public readonly static Level Error = new Level(4000, Parameters.LevelName.ERROR);
-        public readonly static Level Warn = new Level(3000, Parameters.LevelName.WARN);
-        public readonly static Level Info = new Level(2000, Parameters.LevelName.INFO);
-        public readonly static Level Debug = new Level(1000, Parameters.LevelName.DEBUG);
+        public readonly static Level[] Levels = {
+            //new Level(6000, Parameters.LevelName.ALL),
+            new Level(5000, Parameters.LevelName.FATAL),
+            new Level(4000, Parameters.LevelName.ERROR),
+            new Level(3000, Parameters.LevelName.WARN),
+            new Level(2000, Parameters.LevelName.INFO),
+            new Level(1000, Parameters.LevelName.DEBUG) 
+        };
     }
 }

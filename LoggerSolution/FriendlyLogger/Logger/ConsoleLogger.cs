@@ -1,11 +1,13 @@
 ﻿using FriendlyLogger.Core;
 using System;
+using System.Collections.Generic;
 
 namespace FriendlyLogger.Logger
 {
     public class ConsoleLogger : LoggerImpl
     {
-        public ConsoleLogger(string name, string levelName) : base(name, levelName)
+        public ConsoleLogger(string name, IEnumerable<Level> levels)
+            : base(name, levels)
         {
         }
 

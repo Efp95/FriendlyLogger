@@ -1,25 +1,24 @@
-﻿using FriendlyLogger.Core.Interface;
+﻿using FriendlyLogger.Common;
+using FriendlyLogger.Core.Interface;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FriendlyLogger.Core
 {
     public class LogImpl : LoggerWrapperImpl, ILog
     {
         #region [Private Fields]
-        private Level _debugLevel = Level.Debug;
-        private Level _infoLevel = Level.Info;
-        private Level _warnLevel = Level.Warn;
-        private Level _errorLevel = Level.Error;
-        private Level _fatalLevel = Level.Fatal;
+        private Level _debugLevel = Util.GetLevelByType(Parameters.LevelName.DEBUG);
+        private Level _infoLevel = Util.GetLevelByType(Parameters.LevelName.INFO);
+        private Level _warnLevel = Util.GetLevelByType(Parameters.LevelName.WARN);
+        private Level _errorLevel = Util.GetLevelByType(Parameters.LevelName.ERROR);
+        private Level _fatalLevel = Util.GetLevelByType(Parameters.LevelName.FATAL);
+
         private Type _declaringType = typeof(LogImpl);
         #endregion
 
 
-        public LogImpl(ILogger logger) : base(logger)
+        public LogImpl(ILogger logger)
+            : base(logger)
         {
 
         }
@@ -125,7 +124,7 @@ namespace FriendlyLogger.Core
             if (Logger.IsLevelEnabled(_fatalLevel))
             {
                 var formattedText = string.Format(format, args);
-                Fatal (formattedText);
+                Fatal(formattedText);
             }
         }
         #endregion

@@ -1,11 +1,14 @@
 ﻿using FriendlyLogger.Core;
 using System;
+using System.Collections.Generic;
 
 namespace FriendlyLogger.Logger
 {
     public class FileLogger : LoggerImpl
     {
-        public FileLogger(string name, string levelName) : base(name, levelName)
+
+        public FileLogger(string name, IEnumerable<Level> levels)
+            : base(name, levels)
         {
         }
 

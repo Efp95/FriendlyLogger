@@ -1,33 +1,41 @@
-﻿using FriendlyLogger.Core.Interface;
+﻿using FriendlyLogger.Common;
+using FriendlyLogger.Core.Interface;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace FriendlyLogger.Core
 {
     public abstract class LoggerImpl : ILogger
     {
         private string _name;
-        private Level _level;
+        private IEnumerable<Level> _levels;
 
-        protected LoggerImpl(string name, string levelName)
+        protected LoggerImpl(string name, IEnumerable<Level> Levels)
         {
             _name = name;
-            //_level = (Level)levelName;
+            _levels = Levels;
         }
 
         public string Name
         {
             get { return _name; }
         }
-        public Level Level
+        public IEnumerable<Level> Levels
         {
-            get { return _level; }
+            get { return _levels; }
         }
 
         public abstract void Log(Type declaringType, Level level, object message, Exception exception);
 
         public bool IsLevelEnabled(Level level)
         {
-            throw new NotImplementedException();
+            var allLevels = Util.GetLevelByType(Parameters.LevelName.ALL);
+
+            if (_levels.Contains(allLevels))
+                return true;
+            else
+                return _levels.Contains(level);
         }
     }
 }

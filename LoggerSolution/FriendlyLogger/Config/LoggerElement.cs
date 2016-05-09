@@ -6,6 +6,7 @@ namespace FriendlyLogger.Config
     {
         private const string NameAttribute = "name";
         private const string TypeAttribute = "type";
+        private const string LevelElement = "level";
 
         [ConfigurationProperty(NameAttribute, IsRequired = true, IsKey = true)]
         public string Name
@@ -18,5 +19,15 @@ namespace FriendlyLogger.Config
         {
             get { return (string)this[TypeAttribute]; }
         }
+
+        [ConfigurationProperty("levels")]
+        public LevelElementCollection LoggerCollection
+        {
+            get
+            {
+                return this["levels"] as LevelElementCollection;
+            }
+        }
+
     }
 }

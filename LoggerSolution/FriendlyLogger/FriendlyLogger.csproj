@@ -41,7 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Parameters.cs" />
+    <Compile Include="Common\Util.cs" />
     <Compile Include="Config\FriendlyLoggerSection.cs" />
+    <Compile Include="Config\LevelElement.cs" />
+    <Compile Include="Config\LevelElementCollection.cs" />
     <Compile Include="Config\LoggerElement.cs" />
     <Compile Include="Config\LoggerElementCollection.cs" />
     <Compile Include="Core\Interface\ILog.cs" />
