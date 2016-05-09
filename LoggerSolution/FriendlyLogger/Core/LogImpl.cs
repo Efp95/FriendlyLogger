@@ -1,6 +1,7 @@
 ﻿using FriendlyLogger.Common;
 using FriendlyLogger.Core.Interface;
 using System;
+using System.Collections.Generic;
 
 namespace FriendlyLogger.Core
 {
@@ -17,8 +18,8 @@ namespace FriendlyLogger.Core
         #endregion
 
 
-        public LogImpl(ILogger logger)
-            : base(logger)
+        public LogImpl(IEnumerable<ILogger> loggerCollection)
+            : base(loggerCollection)
         {
 
         }
@@ -32,16 +33,19 @@ namespace FriendlyLogger.Core
 
         public void Debug(object message, Exception exception)
         {
-            Logger.Log(_declaringType, _debugLevel, message, exception);
+            foreach (var logger in LoggerCollection)
+            {
+                if (logger.IsLevelEnabled(_debugLevel))
+                {
+                    logger.Log(_declaringType, _debugLevel, message, exception);
+                }
+            }
         }
 
         public void DebugFormat(string format, params object[] args)
         {
-            if (Logger.IsLevelEnabled(_debugLevel))
-            {
-                var formattedText = string.Format(format, args);
-                Debug(formattedText);
-            }
+            var formattedText = string.Format(format, args);
+            Debug(formattedText);
         }
         #endregion
 
@@ -53,16 +57,19 @@ namespace FriendlyLogger.Core
 
         public void Info(object message, Exception exception)
         {
-            Logger.Log(_declaringType, _infoLevel, message, exception);
+            foreach (var logger in LoggerCollection)
+            {
+                if (logger.IsLevelEnabled(_infoLevel))
+                {
+                    logger.Log(_declaringType, _infoLevel, message, exception);
+                }
+            }
         }
 
         public void InfoFormat(string format, params object[] args)
         {
-            if (Logger.IsLevelEnabled(_infoLevel))
-            {
-                var formattedText = string.Format(format, args);
-                Info(formattedText);
-            }
+            var formattedText = string.Format(format, args);
+            Info(formattedText);
         }
         #endregion
 
@@ -74,16 +81,19 @@ namespace FriendlyLogger.Core
 
         public void Warn(object message, Exception exception)
         {
-            Logger.Log(_declaringType, _warnLevel, message, exception);
+            foreach (var logger in LoggerCollection)
+            {
+                if (logger.IsLevelEnabled(_warnLevel))
+                {
+                    logger.Log(_declaringType, _warnLevel, message, exception);
+                }
+            }
         }
 
         public void WarnFormat(string format, params object[] args)
         {
-            if (Logger.IsLevelEnabled(_warnLevel))
-            {
-                var formattedText = string.Format(format, args);
-                Warn(formattedText);
-            }
+            var formattedText = string.Format(format, args);
+            Warn(formattedText);
         }
         #endregion
 
@@ -95,16 +105,19 @@ namespace FriendlyLogger.Core
 
         public void Error(object message, Exception exception)
         {
-            Logger.Log(_declaringType, _errorLevel, message, exception);
+            foreach (var logger in LoggerCollection)
+            {
+                if (logger.IsLevelEnabled(_errorLevel))
+                {
+                    logger.Log(_declaringType, _errorLevel, message, exception);
+                }
+            }
         }
 
         public void ErrorFormat(string format, params object[] args)
         {
-            if (Logger.IsLevelEnabled(_errorLevel))
-            {
-                var formattedText = string.Format(format, args);
-                Error(formattedText);
-            }
+            var formattedText = string.Format(format, args);
+            Error(formattedText);
         }
         #endregion
 
@@ -116,16 +129,19 @@ namespace FriendlyLogger.Core
 
         public void Fatal(object message, Exception exception)
         {
-            Logger.Log(_declaringType, _fatalLevel, message, exception);
+            foreach (var logger in LoggerCollection)
+            {
+                if (logger.IsLevelEnabled(_fatalLevel))
+                {
+                    logger.Log(_declaringType, _fatalLevel, message, exception);
+                }
+            }
         }
 
         public void FatalFormat(string format, params object[] args)
         {
-            if (Logger.IsLevelEnabled(_fatalLevel))
-            {
-                var formattedText = string.Format(format, args);
-                Fatal(formattedText);
-            }
+            var formattedText = string.Format(format, args);
+            Fatal(formattedText);
         }
         #endregion
     }

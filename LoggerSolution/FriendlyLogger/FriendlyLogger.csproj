@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\CustomExceptions.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Common\Parameters.cs" />
     <Compile Include="Common\Util.cs" />
     <Compile Include="Config\FriendlyLoggerSection.cs" />

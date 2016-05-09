@@ -1,19 +1,20 @@
 ﻿using FriendlyLogger.Core.Interface;
+using System.Collections.Generic;
 
 namespace FriendlyLogger.Core
 {
     public class LoggerWrapperImpl : ILoggerWrapper
     {
-        private readonly ILogger _logger;
+        private readonly IEnumerable<ILogger> _loggerCollection;
 
-        protected LoggerWrapperImpl(ILogger logger)
+        protected LoggerWrapperImpl(IEnumerable<ILogger> logger)
         {
-            _logger = logger;
+            _loggerCollection = logger;
         }
 
-        public ILogger Logger
+        public IEnumerable<ILogger> LoggerCollection
         {
-            get { return _logger; }
+            get { return _loggerCollection; }
         }
     }
 }

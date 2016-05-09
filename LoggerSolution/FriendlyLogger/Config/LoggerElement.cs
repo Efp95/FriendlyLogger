@@ -21,7 +21,7 @@ namespace FriendlyLogger.Config
         }
 
         [ConfigurationProperty("levels")]
-        public LevelElementCollection LoggerCollection
+        public LevelElementCollection LevelCollection
         {
             get
             {

@@ -32,10 +32,10 @@ namespace FriendlyLogger.Core
         {
             var allLevels = Util.GetLevelByType(Parameters.LevelName.ALL);
 
-            if (_levels.Contains(allLevels))
+            if (Levels.Contains(allLevels))
                 return true;
             else
-                return _levels.Contains(level);
+                return Levels.Contains(level);
         }
     }
 }
