@@ -44,9 +44,16 @@
     <Compile Include="Config\FriendlyLoggerSection.cs" />
     <Compile Include="Config\LoggerElement.cs" />
     <Compile Include="Config\LoggerElementCollection.cs" />
-    <Compile Include="Core\ILog.cs" />
+    <Compile Include="Core\Interface\ILog.cs" />
+    <Compile Include="Core\Interface\ILogger.cs" />
+    <Compile Include="Core\Interface\ILoggerWrapper.cs" />
+    <Compile Include="Core\Level.cs" />
+    <Compile Include="Core\LoggerImpl.cs" />
+    <Compile Include="Core\LoggerWrapperImpl.cs" />
+    <Compile Include="Core\LogImpl.cs" />
     <Compile Include="Logger\ConsoleLogger.cs" />
     <Compile Include="Logger\FileLogger.cs" />
+    <Compile Include="LogManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
