@@ -4,8 +4,6 @@ using FriendlyLogger.Core;
 using FriendlyLogger.Core.Interface;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace FriendlyLogger
 {
@@ -20,29 +18,61 @@ namespace FriendlyLogger
 
         public static ILog GetLogger()
         {
+            var configuration = FriendlyLoggerSection.Configuration;
+
+            IEnumerable<ILogger> configLoggers = GetConfigLoggers(configuration);
+
+            return new LogImpl(configLoggers);
+        }
+
+        public static ILog GetLogger(System.Xml.XmlDocument configurationFile)
+        {
+            var configuration = new FriendlyLoggerSection();
+            configuration.ReadFromXml(configurationFile);
+
+            IEnumerable<ILogger> configLoggers = GetConfigLoggers(configuration);
+
+            return new LogImpl(configLoggers);
+        }
+
+
+        #region [Private Methods]
+        private static IEnumerable<ILogger> GetConfigLoggers(FriendlyLoggerSection configuration)
+        {
             List<ILogger> configLoggers = new List<ILogger>();
 
-            var section = FriendlyLoggerSection.Section;
-            if (section == null)
+            if (configuration == null)
                 throw new InvalidConfigurationSectionException(NoSectionConfig);
 
-            foreach (LoggerElement logger in section.LoggerCollection)
+            foreach (LoggerElement logger in configuration.LoggerCollection)
             {
-                var loggerType = Type.GetType(logger.Type);
-                if (loggerType == null)
-                    throw new InvalidConfigurationElementException(InvalidTypeDefinition);
-
-                if (!typeof(ILogger).IsAssignableFrom(loggerType))
-                    throw new InvalidConfigurationElementException(MustInheritFromLoggerImpl);
-
-                var levelCollection = LevelMapping.Run(logger.LevelCollection);
-                var loggerInstance = (ILogger)Activator.CreateInstance(loggerType, logger.Name, levelCollection);
+                ILogger loggerInstance = RetrieveLoggerInstance(logger);
 
                 configLoggers.Add(loggerInstance);
             }
 
-            return new LogImpl(configLoggers);
+            return configLoggers;
         }
+
+        private static ILogger RetrieveLoggerInstance(LoggerElement logger)
+        {
+            ILogger loggerInstance = null;
+
+            var loggerType = Type.GetType(logger.Type);
+
+            if (loggerType == null)
+                throw new InvalidConfigurationElementException(InvalidTypeDefinition);
+
+            if (!typeof(ILogger).IsAssignableFrom(loggerType))
+                throw new InvalidConfigurationElementException(MustInheritFromLoggerImpl);
+
+            var levelCollection = LevelMapping.Execute(logger.LevelCollection);
+
+            loggerInstance = (ILogger)Activator.CreateInstance(loggerType, logger.Name, levelCollection);
+
+            return loggerInstance;
+        }
+        #endregion
 
     }
 }

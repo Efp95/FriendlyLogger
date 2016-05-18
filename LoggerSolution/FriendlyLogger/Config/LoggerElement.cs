@@ -6,27 +6,27 @@ namespace FriendlyLogger.Config
     {
         private const string NameAttribute = "name";
         private const string TypeAttribute = "type";
-        private const string LevelElement = "level";
+        private const string LevelsCollection = "levels";
 
         [ConfigurationProperty(NameAttribute, IsRequired = true, IsKey = true)]
         public string Name
         {
             get { return (string)this[NameAttribute]; }
+            set { this[NameAttribute] = value; }
         }
 
         [ConfigurationProperty(TypeAttribute, IsRequired = true)]
         public string Type
         {
             get { return (string)this[TypeAttribute]; }
+            set { this[TypeAttribute] = value; }
         }
 
-        [ConfigurationProperty("levels")]
+        [ConfigurationProperty(LevelsCollection)]
         public LevelElementCollection LevelCollection
         {
-            get
-            {
-                return this["levels"] as LevelElementCollection;
-            }
+            get { return this[LevelsCollection] as LevelElementCollection; }
+            set { this[LevelsCollection] = value; }
         }
 
     }

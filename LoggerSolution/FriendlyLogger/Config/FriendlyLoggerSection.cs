@@ -1,5 +1,6 @@
 ﻿using FriendlyLogger.Common;
 using System.Configuration;
+using System.Xml;
 
 namespace FriendlyLogger.Config
 {
@@ -8,7 +9,7 @@ namespace FriendlyLogger.Config
         private static FriendlyLoggerSection _configuration =
             ConfigurationManager.GetSection(Parameters.Config.SECTION_NAME) as FriendlyLoggerSection;
 
-        public static FriendlyLoggerSection Section
+        public static FriendlyLoggerSection Configuration
         {
             get { return _configuration; }
         }
@@ -20,6 +21,14 @@ namespace FriendlyLogger.Config
             get
             {
                 return this["loggers"] as LoggerElementCollection;
+            }
+        }
+
+        public void ReadFromXml(XmlDocument document)
+        {
+            using (XmlReader reader = new XmlNodeReader(document))
+            {
+                base.DeserializeSection(reader);
             }
         }
     }
