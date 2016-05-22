@@ -6,7 +6,7 @@ namespace FriendlyLogger.Core.Interface
     {
         string Name { get; }
 
-        void Log(Type declaringType, Level level, object message, Exception exception);
+        void Log(Level level, object message, Exception exception);
 
         bool IsLevelEnabled(Level level);
     }

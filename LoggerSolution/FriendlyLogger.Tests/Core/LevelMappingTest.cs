@@ -33,8 +33,8 @@ namespace FriendlyLogger.Tests.Core
 
             using (var enumerator = levels.GetEnumerator())
             {
-                if (enumerator.MoveNext())
-                    enumerator.Current.Name.Should().Be("DEBUG");
+                enumerator.MoveNext();
+                enumerator.Current.Name.Should().Be("DEBUG");
             }
         }
 

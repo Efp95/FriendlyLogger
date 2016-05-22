@@ -10,7 +10,6 @@ namespace FriendlyLogger.Core
         #region [Fields]
         private string _name;
         private int _value;
-        private string _displayName;
         #endregion
 
         #region [Properties]
@@ -24,23 +23,13 @@ namespace FriendlyLogger.Core
             get { return _value; }
             set { _value = value; }
         }
-        public string DisplayName
-        {
-            get { return _displayName; }
-            set { _displayName = value; }
-        }
         #endregion
 
-        public Level(int level, string levelName, string displayName)
+
+        public Level(int level, string levelName)
         {
             _value = level;
             _name = levelName;
-            _displayName = displayName;
-        }
-
-        public Level(int level, string levelName)
-            : this(level, levelName, levelName)
-        {
         }
 
 
