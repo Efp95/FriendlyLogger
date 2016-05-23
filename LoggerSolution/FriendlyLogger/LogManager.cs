@@ -27,6 +27,9 @@ namespace FriendlyLogger
 
         public static ILog GetLogger(System.Xml.XmlDocument configurationFile)
         {
+            if (configurationFile == null)
+                throw new ArgumentNullException("configurationFile");
+
             var configuration = new FriendlyLoggerSection();
             configuration.ReadFromXml(configurationFile);
 

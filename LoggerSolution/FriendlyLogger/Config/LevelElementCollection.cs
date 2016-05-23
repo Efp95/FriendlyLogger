@@ -9,7 +9,7 @@ namespace FriendlyLogger.Config
 {
     public class LevelElementCollection : ConfigurationElementCollection
     {
-        private string _levelElementName = "level";
+        private string _levelElementName = "add";
 
 
         public LevelElement this[object key]
