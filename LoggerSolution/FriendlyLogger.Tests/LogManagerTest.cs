@@ -34,6 +34,9 @@ namespace FriendlyLogger.Tests
                                     <levels>
                                         <add value=""ALL""></add>
                                     </levels>
+                                    <params>
+                                        <add key=""Wut"" value=""Valor"" />
+                                    </params>
                                 </logger>
                             </loggers>
                         </friendlyLogger>");

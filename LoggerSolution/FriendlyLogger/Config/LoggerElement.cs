@@ -4,9 +4,12 @@ namespace FriendlyLogger.Config
 {
     public class LoggerElement : ConfigurationElement
     {
+        #region [Constants]
         private const string NameAttribute = "name";
         private const string TypeAttribute = "type";
         private const string LevelsCollection = "levels";
+        private const string ParametersCollection = "params";
+        #endregion
 
         [ConfigurationProperty(NameAttribute, IsRequired = true, IsKey = true)]
         public string Name
@@ -27,6 +30,13 @@ namespace FriendlyLogger.Config
         {
             get { return this[LevelsCollection] as LevelElementCollection; }
             set { this[LevelsCollection] = value; }
+        }
+
+        [ConfigurationProperty(ParametersCollection)]
+        public ParameterElementCollection ParameterCollection
+        {
+            get { return this[ParametersCollection] as ParameterElementCollection; }
+            set { this[ParametersCollection] = value; }
         }
 
     }
