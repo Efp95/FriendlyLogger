@@ -2,12 +2,17 @@
 using FriendlyLogger.Core.Interface;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace FriendlyLogger.Core
 {
-    public class LogImpl : LoggerWrapperImpl, ILog
+    public sealed class LogImpl : LoggerWrapperImpl, ILog
     {
         #region [Private Fields]
+        // Skips to Calling Context
+        private const int SkippedFrames = 2;
+        private Type _declaringType;
+
         private Level _debugLevel = Util.GetLevelByType(Parameters.LevelName.DEBUG);
         private Level _infoLevel = Util.GetLevelByType(Parameters.LevelName.INFO);
         private Level _warnLevel = Util.GetLevelByType(Parameters.LevelName.WARN);
@@ -15,11 +20,10 @@ namespace FriendlyLogger.Core
         private Level _fatalLevel = Util.GetLevelByType(Parameters.LevelName.FATAL);
         #endregion
 
-
         public LogImpl(IEnumerable<ILogger> loggerCollection)
             : base(loggerCollection)
         {
-
+            _declaringType = new StackFrame(SkippedFrames).GetMethod().ReflectedType;
         }
 
 
@@ -35,7 +39,7 @@ namespace FriendlyLogger.Core
             {
                 if (logger.IsLevelEnabled(_debugLevel))
                 {
-                    logger.Log(_debugLevel, message, exception);
+                    logger.Log(_declaringType, _debugLevel, message, exception);
                 }
             }
         }
@@ -59,7 +63,7 @@ namespace FriendlyLogger.Core
             {
                 if (logger.IsLevelEnabled(_infoLevel))
                 {
-                    logger.Log(_infoLevel, message, exception);
+                    logger.Log(_declaringType, _infoLevel, message, exception);
                 }
             }
         }
@@ -83,7 +87,7 @@ namespace FriendlyLogger.Core
             {
                 if (logger.IsLevelEnabled(_warnLevel))
                 {
-                    logger.Log(_warnLevel, message, exception);
+                    logger.Log(_declaringType, _warnLevel, message, exception);
                 }
             }
         }
@@ -107,7 +111,7 @@ namespace FriendlyLogger.Core
             {
                 if (logger.IsLevelEnabled(_errorLevel))
                 {
-                    logger.Log(_errorLevel, message, exception);
+                    logger.Log(_declaringType, _errorLevel, message, exception);
                 }
             }
         }
@@ -131,7 +135,7 @@ namespace FriendlyLogger.Core
             {
                 if (logger.IsLevelEnabled(_fatalLevel))
                 {
-                    logger.Log(_fatalLevel, message, exception);
+                    logger.Log(_declaringType, _fatalLevel, message, exception);
                 }
             }
         }

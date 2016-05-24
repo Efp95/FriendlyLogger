@@ -12,7 +12,7 @@ namespace FriendlyLogger.Logger
         {
         }
 
-        public override void Log(Level level, object message, Exception exception)
+        public override void Log(Type declaingType, Level level, object message, Exception exception)
         {
             var colorSettings = new ConsoleColorManager(level);
 

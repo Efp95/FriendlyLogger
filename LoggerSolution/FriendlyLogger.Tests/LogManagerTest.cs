@@ -24,13 +24,13 @@ namespace FriendlyLogger.Tests
         }
 
         [Test]
-        public void Should_ReturnNotNull_When_LoadFromXml()
+        public void Should_ReturnNotNull_When_LoadFromValidXml()
         {
             XmlDocument friendlyLoggerDoc = new XmlDocument();
             friendlyLoggerDoc
                 .LoadXml(@"<friendlyLogger>
                             <loggers>
-                                <logger name=""FirsLogger"" type=""FriendlyLogger.Logger.FileLogger, FriendlyLogger"">
+                                <logger name=""FirstLogger"" type=""FriendlyLogger.Logger.FileLogger, FriendlyLogger"">
                                     <levels>
                                         <add value=""ALL""></add>
                                     </levels>

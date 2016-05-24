@@ -26,7 +26,7 @@ namespace FriendlyLogger.Core
             get { return _levels; }
         }
 
-        public abstract void Log(Level level, object message, Exception exception);
+        public abstract void Log(Type declaringType, Level level, object message, Exception exception);
 
         public bool IsLevelEnabled(Level level)
         {
