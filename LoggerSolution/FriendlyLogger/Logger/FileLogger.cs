@@ -8,12 +8,13 @@ namespace FriendlyLogger.Logger
     public class FileLogger : LoggerImpl
     {
 
-        public FileLogger(string name, IEnumerable<Level> levels)
-            : base(name, levels)
+        public FileLogger(string name, IEnumerable<Level> levels, Dictionary<string, string> logParameters)
+            : base(name, levels, logParameters)
         {
         }
 
-        public override void Log(Type declaingType, Level level, object message, Exception exception)
+        public override void Log(Type declaingType, Level level, object message,
+                                    Dictionary<string, string> logParameters, Exception exception)
         {
             if (exception == null)
             {

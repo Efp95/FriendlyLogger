@@ -8,11 +8,12 @@ namespace FriendlyLogger.Logger
     public class ConsoleLogger : LoggerImpl
     {
         public ConsoleLogger(string name, IEnumerable<Level> levels)
-            : base(name, levels)
+            : base(name, levels, null)
         {
         }
 
-        public override void Log(Type declaingType, Level level, object message, Exception exception)
+        public override void Log(Type declaingType, Level level, object message,
+                                    Dictionary<string, string> logParameters, Exception exception)
         {
             var colorSettings = new ConsoleColorManager(level);
 

@@ -70,8 +70,9 @@ namespace FriendlyLogger
                 throw new InvalidConfigurationElementException(MustInheritFromLoggerImpl);
 
             var levelCollection = LevelMapping.Execute(logger.LevelCollection);
+            var parameterCollection = Util.MapParameterCollectionToDictionary(logger.ParameterCollection);
 
-            loggerInstance = (ILogger)Activator.CreateInstance(loggerType, logger.Name, levelCollection);
+            loggerInstance = (ILogger)Activator.CreateInstance(loggerType, logger.Name, levelCollection, parameterCollection);
 
             return loggerInstance;
         }

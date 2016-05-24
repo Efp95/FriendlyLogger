@@ -35,14 +35,14 @@ namespace FriendlyLogger.Tests
                                         <add value=""ALL""></add>
                                     </levels>
                                     <params>
-                                        <add key=""Wut"" value=""Valor"" />
+                                        <add key=""MyKey"" value=""MyValue"" />
                                     </params>
                                 </logger>
                             </loggers>
                         </friendlyLogger>");
 
             var logger = LogManager.GetLogger(friendlyLoggerDoc);
-
+            
             logger.Should().NotBeNull();
         }
 

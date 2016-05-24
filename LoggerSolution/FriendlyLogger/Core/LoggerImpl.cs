@@ -10,11 +10,13 @@ namespace FriendlyLogger.Core
     {
         private string _name;
         private IEnumerable<Level> _levels;
+        private Dictionary<string, string> _logParameters;
 
-        protected LoggerImpl(string name, IEnumerable<Level> Levels)
+        protected LoggerImpl(string name, IEnumerable<Level> levels, Dictionary<string, string> logParameters)
         {
             _name = name;
-            _levels = Levels;
+            _levels = levels;
+            _logParameters = logParameters;
         }
 
         public string Name
@@ -25,8 +27,12 @@ namespace FriendlyLogger.Core
         {
             get { return _levels; }
         }
+        public Dictionary<string, string> LogParameters
+        {
+            get { return _logParameters; }
+        }
 
-        public abstract void Log(Type declaringType, Level level, object message, Exception exception);
+        public abstract void Log(Type declaringType, Level level, object message, Dictionary<string, string> logParameters, Exception exception);
 
         public bool IsLevelEnabled(Level level)
         {
