@@ -1,4 +1,5 @@
 ﻿using FriendlyLogger.Common;
+using System;
 using System.Configuration;
 using System.Xml;
 
@@ -24,12 +25,19 @@ namespace FriendlyLogger.Config
             }
         }
 
-        public void ReadFromXml(XmlDocument document)
+        public static FriendlyLoggerSection ReadFromXml(XmlDocument document)
         {
+            if (document == null)
+                throw new ArgumentNullException("document");
+
+            var configSection = new FriendlyLoggerSection();
+
             using (XmlReader reader = new XmlNodeReader(document))
             {
-                base.DeserializeSection(reader);
+                configSection.DeserializeSection(reader);
             }
+
+            return configSection;
         }
     }
 }

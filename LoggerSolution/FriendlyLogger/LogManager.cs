@@ -1,5 +1,6 @@
 ﻿using FriendlyLogger.Common;
 using FriendlyLogger.Config;
+using FriendlyLogger.Config.Provider;
 using FriendlyLogger.Core;
 using FriendlyLogger.Core.Interface;
 using System;
@@ -25,15 +26,15 @@ namespace FriendlyLogger
             return new LogImpl(configLoggers);
         }
 
-        public static ILog GetLogger(System.Xml.XmlDocument configurationFile)
+        public static ILog GetLogger(IConfigurationProvider configurationProvider)
         {
-            if (configurationFile == null)
-                throw new ArgumentNullException("configurationFile");
+            if (configurationProvider == null)
+                throw new ArgumentNullException("configurationProvider");
 
-            var configuration = new FriendlyLoggerSection();
-            configuration.ReadFromXml(configurationFile);
+            var configuration = configurationProvider.LoadConfiguration();
+            var configLoggerSection = FriendlyLoggerSection.ReadFromXml(configuration);
 
-            IEnumerable<ILogger> configLoggers = GetConfigLoggers(configuration);
+            var configLoggers = GetConfigLoggers(configLoggerSection);
 
             return new LogImpl(configLoggers);
         }

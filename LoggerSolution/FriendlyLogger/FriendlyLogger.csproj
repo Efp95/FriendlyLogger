@@ -52,6 +52,7 @@
     <Compile Include="Config\LoggerElementCollection.cs" />
     <Compile Include="Config\ParameterElement.cs" />
     <Compile Include="Config\ParameterElementCollection.cs" />
+    <Compile Include="Config\Provider\IConfigurationProvider.cs" />
     <Compile Include="Core\Interface\ILog.cs" />
     <Compile Include="Core\Interface\ILogger.cs" />
     <Compile Include="Core\Interface\ILoggerWrapper.cs" />
